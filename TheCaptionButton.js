@@ -68,6 +68,8 @@ var index = 1;
 var pause = true;
 var editing = false;
 var myVideo = document.getElementById("example_video_1"); 
+var mulEnterOn;
+var stopOn = false;
 
 // document.addEventListener("keydown", stopFunc);
 document.addEventListener("keypress", stopFunc);
@@ -104,11 +106,27 @@ function stopFunc(e) {
 				pause = true;
 			}
 		}
+		if (e.keyCode == 13) {
+			mulEnterOn = true;
+			write();
+			mulEnterOn = false;
+		}
 		if (e.keyCode == 109) {
+			mulEnterOn = false;
 			write();
 		}
 		if (e.keyCode == 114) {
 			reset();
+		}
+		if (e.keyCode == 115) {
+			if (stopOn) {
+				stopOn = false;
+				document.getElementById("stopFunction").innerHTML = "Off";
+			}
+			else {
+				stopOn = true;
+				document.getElementById("stopFunction").innerHTML = "On";
+			}
 		}
 	}
 }
@@ -145,11 +163,13 @@ function update(time) {
 function start() {
 	clocktimer = setInterval("update(x.time())", 1);
 	x.start();
+	// playthevideo();
 }
 
 function stop() {
 	x.stop();
 	clearInterval(clocktimer);
+	// pausethevideo();
 }
 
 function reset() {
@@ -159,6 +179,9 @@ function reset() {
 }
 
 function write() {
+	if (stopOn) {
+			stop();
+		}
 	if (!inPressed) {
 		if (blank) {
 			document.getElementById('textbox').innerHTML = index + "\n" + formatTime(x.time()) + " --> ";
@@ -176,7 +199,9 @@ function write() {
 		document.getElementById('textbox').innerHTML += formatTime(x.time()) + "\n";
 		recentFrame = x.start();
 		inPressed = false;
-		write();
+		if (mulEnterOn) {
+			write();
+		}
 		// outPressed = true;
 	}
 }
@@ -201,5 +226,20 @@ function returnFrame() {
 //     document.getElementById("currentTime").innerHTML = this.currentTime;
 //     currentTime = this.currentTime;
 // });
+// }
+
+// function playthevideo(){
+// 	var myPlayer = document.getElementById('my-video');
+// 	myPlayer.playVideo();
+// }
+
+// function stopthevideo(){
+// 	var myPlayer = document.getElementById('my-video');
+// 	myPlayer.stopVideo();
+// }
+
+// function pausethevideo(){
+// 	var myPlayer = document.getElementById('my-video'); 
+// 	myPlayer.pauseVideo();
 // }
 

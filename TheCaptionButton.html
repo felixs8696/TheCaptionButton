@@ -3,13 +3,15 @@
 <head>
 	<link rel="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" href="index.css">
-
+	<link href="../css/_static.css" rel = "stylesheet">
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
-
+	<link rel="stylesheet" href="styleVideo.css">
 	<link href="video-js/video-js.css" rel="stylesheet" type="text/css">
 	<!-- video.js must be in the <head> for older IEs to work. -->
 	<script src="video-js/video.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="../images/fslogo1.png" sizes="16x16 24x24 32x32 48x48" />
+	<link rel="icon" type="image/x-icon" href="../images/fslogo1.png" sizes="16x16 24x24 32x32 48x48" />
 
 	<!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
 <!--	<script>
@@ -19,9 +21,9 @@
 <script type="text/javascript" src = "TheCaptionButton.js"></script>
 <body onload="show();">
 	<div class= "container">
-		<div class= "row">
+		<div class= "nTrow">
 			<div class= "col-lg-6">
-				<textarea id="textbox" rows = "30" cols = "75" onclick="inputSelected()" onfocusout="inputDeSelected()" style= "margin: 20px">Blank Subtitle File...</textarea>
+				<textarea id="textbox" rows = "30" cols = "75" onclick="inputSelected()" onfocusout="inputDeSelected()" style= "margin: 20px" placeholder="Blank Subtitle File..." readonly></textarea>
 				<br>
 				<button id="create" onclick="createFile()" >Create File</button>
 				<a download="TheCaptionButton.txt" id="downloadlink" style="display: none">Download as .txt file</a>
@@ -56,7 +58,28 @@
 					<input type="button" value="stop" onclick="stop();">
 					<input type="button" value="reset" onclick="reset()">
 					<input type="button" value="Return" onclick="returnFrame()">
-					<p>[Return] - Returns the timer to the most recent frame input</p>
+					<div style="width: 100%; display: block; margin-left: auto; margin-right: auto;">
+						<div class="col-sm-3">
+							<p style="text-align: center;">[ Space ]<br>Start/Stop Timer</p>
+						</div>
+						<div class="col-sm-3">
+							<p style="text-align: center;">[ r ]<br>Reset Timer</p>
+						</div>
+						<div class="col-sm-3">
+							<p style="text-align: center;">[ Enter ]<br>Continuous Time</p>
+						</div>
+						<div class="col-sm-3">
+							<p style="text-align: center;">[ m ]<br>Single Time</p>
+						</div>
+					</div>
+					<br><br><br><br><br>
+					<p style="text-align: left; line-height: .5em;">Stop Function: <span id="stopFunction">Off</span></p>
+					<p style="text-align: left; line-height: .5em;"> [ s ] Toggle timer to stop every time [ Enter ] or [ m ] is pressed.</p>
+					<br>
+						<div class="videoWrapper">
+					    <!-- Copy & Pasted from YouTube -->
+					    	<iframe id ="my-video" width="560" height="349" src="http://www.youtube.com/v/EmC4aNpFdSA?enablejsapi=1&version=3&playerapiid=ytplayer" frameborder="0" allowfullscreen></iframe>
+						</div>
 				</div>
 <!-- 				<div style="text-align:center;">
 					<div><h1>Time: <span id="currentTime"></span> </h1></div>
@@ -65,5 +88,6 @@
 			</div>
 		</div>
 	</div>
+	<br>
 </body>
 </html>
